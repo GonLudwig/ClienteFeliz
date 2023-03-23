@@ -17,7 +17,11 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/home', 'ClienteController@index')->name('home');
+    
+    Route::post('/cliente', 'ClienteController@store')->name('cliente.store');
+    Route::patch('/cliente/{cliente}', 'ClienteController@update')->name('cliente.update');
+    Route::delete('/cliente/{cliente}', 'ClienteController@destroy')->name('cliente.destroy');
 });
 
