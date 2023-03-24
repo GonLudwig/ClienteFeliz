@@ -14,9 +14,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
-
-        return view('home', ['clientes' => $clientes]);
+        $data['data'] = Cliente::all();
+        
+        return response()->json($data);
     }
 
     /**
@@ -27,7 +27,8 @@ class ClienteController extends Controller
      */
     public function store(ClienteRequest $request)
     {
-        //
+        $cliente = Cliente::create($request->all());
+        return response()->json($cliente);
     }
 
     /**
@@ -39,7 +40,7 @@ class ClienteController extends Controller
      */
     public function update(ClienteRequest $request, Cliente $cliente)
     {
-        return response()->json($cliente->update($request->all()));
+        return response()->json($request->all());
     }
 
     /**
