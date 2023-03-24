@@ -24,7 +24,21 @@ class ClienteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'required|string',
+            'telefone' => 'string',
+            'email' => 'email|unique:App\Cliente,email',
+            'ultima_compra' => 'string'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
         ];
     }
 }
