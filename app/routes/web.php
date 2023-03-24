@@ -18,8 +18,9 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/home', 'ClienteController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/cliente', 'ClienteController@index')->name('cliente.store');
     Route::post('/cliente', 'ClienteController@store')->name('cliente.store');
     Route::put('/cliente/{cliente}', 'ClienteController@update')->name('cliente.update');
     Route::delete('/cliente/{cliente}', 'ClienteController@destroy')->name('cliente.destroy');
