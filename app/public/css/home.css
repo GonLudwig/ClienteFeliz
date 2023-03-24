@@ -1,0 +1,11 @@
+.adicionarCliente {
+    display: flex;
+}
+
+.dadosPdf {
+    display: none;
+}
+
+.tabelaDataTable {
+    margin-top: 2rem;
+}
