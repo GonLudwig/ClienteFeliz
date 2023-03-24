@@ -1,67 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/home.css')}}">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div>
-                <table id="myTable" class="display">
+            <div class="card">
+                <div class="card-header">
+                    Adicionar Cliente
+                </div>
+                <div class="card-body">
+                    <div class="adicionarCliente">
+                        <input class="input-group-text" name="nome" type="text" placeholder="Nome">
+                        <input class="input-group-text" name="telefone" type="text" placeholder="Telefone">
+                        <input class="input-group-text" name="email" type="text" placeholder="E-mail">
+                        <input class="input-group-text" name="ultima_compra" type="text" placeholder="Ultima Compra">
+                        <button class="btn btn-success" onclick="criar(this)" >Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tabelaDataTable">
+                <table id="clienteTable" class="display">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Ultima Compra</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($clientes as $cliente)
-                            <tr>
-                                <td>{{$cliente->id}}</td>
-                                <td><input class="input-group-text" name="nome{{$cliente->id}}" value="{{$cliente->nome}}"></td>
-                                <td><button class="btn btn-primary" onclick="editar({{$cliente->id}})">Editar</button></td>
-                                <td><button class="btn btn-danger" onclick="excluir({{$cliente->id}})">Excluir</button></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready( function () {
-        $('#myTable').DataTable() 
-    })
-
-    function excluir(id) {
-        $.ajax({
-            url: `${window.location.origin}/cliente/${id}`,
-            method: "DELETE",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
-        .done(function () {
-            window.location.reload()
-        })
-    }
-
-    function editar(id) {
-        $.ajax({
-            url: `${window.location.origin}/cliente/${id}`,
-            method: "PUT",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                nome: $(`input[name=nome${id}]`).val()
-            }
-        })
-        .done(function () {
-            window.location.reload()
-        })
-    }
-
-</script>
+<script src="{{ asset('js/home.js')}}"></script>
 @endsection
