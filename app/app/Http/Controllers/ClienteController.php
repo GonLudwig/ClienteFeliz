@@ -14,9 +14,10 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
+        $clientes = Cliente::all();
 
+        return view('home', ['clientes' => $clientes]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +39,7 @@ class ClienteController extends Controller
      */
     public function update(ClienteRequest $request, Cliente $cliente)
     {
-        //
+        return response()->json($cliente->update($request->all()));
     }
 
     /**
@@ -47,8 +48,8 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClienteRequest $cliente)
+    public function destroy(Cliente $cliente)
     {
-        //
+        return response()->json($cliente->delete());
     }
 }
