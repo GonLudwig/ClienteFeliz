@@ -12,40 +12,40 @@ let table = $('#clienteTable').DataTable({
             data: null,
             render: function (data, type, row) {
                 return `<input class="input-group-text" name="nome${data.id}" value="${data.nome}">
-                    <div class="dadosPdf">${data.nome}</div>`;
+                    <div class="dadosPdf">${data.nome}</div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
                 return `<input class="input-group-text" name="telefone${data.id}" value="${data.telefone}">
-                    <div class="dadosPdf">${data.telefone}</div>`;
+                    <div class="dadosPdf">${data.telefone}</div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
                 return `<input class="input-group-text" name="email${data.id}" value="${data.email}">
-                    <div class="dadosPdf">${data.email}</div>`;
+                    <div class="dadosPdf">${data.email}</div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
                 return `<input class="input-group-text" name="ultima_compra${data.id}" value="${data.ultima_compra}">
-                    <div class="dadosPdf">${data.ultima_compra}</div>`;
+                    <div class="dadosPdf">${data.ultima_compra}</div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
-                return `<button class="btn btn-primary" onclick="editar(${data.id})">Editar</button>`;
+                return `<button class="btn btn-primary" onclick="editar(${data.id})">Editar</button>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
-                return `<button class="btn btn-danger" onclick="excluir(${data.id})">Excluir</button>`;
+                return `<button class="btn btn-danger" onclick="excluir(${data.id})">Excluir</button>`
             }
         }
     ],
@@ -65,7 +65,8 @@ function excluir(id) {
             table.ajax.reload()
         })
         .fail(data => {
-            alert(data.responseJSON.message)
+            let response = data.responseJSON
+            alert(Object.values(response.errors)[0][0] ?? response.message)
         })
     }
 }
@@ -84,13 +85,12 @@ function editar(id) {
             ultima_compra: $(`input[name=ultima_compra${id}]`).val(),
         }
     })
-    .done(function (data) {
-        console.log(data)
+    .done(function () {
         table.ajax.reload()
     })
     .fail(data => {
-        console.log(data)
-        alert(data.responseJSON.message)
+        let response = data.responseJSON
+        alert(Object.values(response.errors)[0][0] ?? response.message)
     })
 }
 
@@ -109,14 +109,16 @@ function criar(element) {
             ultima_compra: paiElement.children('input[name=ultima_compra]').val(),
         }
     })
-    .done(function () {
+    .done(function (data) {
+        alert(data.message)
         paiElement.children('input[name=nome]').val("")
-        paiElement.children('input[name=telefone]').val(""),
-        paiElement.children('input[name=email]').val(""),
-        paiElement.children('input[name=ultima_compra]').val(""),
+        paiElement.children('input[name=telefone]').val("")
+        paiElement.children('input[name=email]').val("")
+        paiElement.children('input[name=ultima_compra]').val("")
         table.ajax.reload()
     })
     .fail(data => {
-        alert(data.responseJSON.message)
+        let response = data.responseJSON
+        alert(Object.values(response.errors)[0][0] ?? response.message)
     })
 }

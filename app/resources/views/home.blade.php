@@ -11,11 +11,11 @@
                 </div>
                 <div class="card-body">
                     <div class="adicionarCliente">
-                        <input class="input-group-text" name="nome" type="text" placeholder="Nome">
-                        <input class="input-group-text" name="telefone" type="text" placeholder="Telefone">
-                        <input class="input-group-text" name="email" type="text" placeholder="E-mail">
-                        <input class="input-group-text" name="ultima_compra" type="text" placeholder="Ultima Compra">
-                        <button class="btn btn-success" onclick="criar(this)" >Adicionar</button>
+                        <input class="input-group-text col-3" name="nome" type="text" placeholder="Nome">
+                        <input class="input-group-text col-2" name="telefone" type="text" placeholder="Telefone">
+                        <input class="input-group-text col-3" name="email" type="text" placeholder="E-mail">
+                        <input class="input-group-text col-3" name="ultima_compra" type="text" placeholder="Ultima Compra">
+                        <button class="btn btn-success col-1" onclick="criar(this)" >Adicionar</button>
                     </div>
                 </div>
             </div>
