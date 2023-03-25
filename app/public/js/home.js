@@ -4,7 +4,7 @@ let table = $('#clienteTable').DataTable({
         'pdfHtml5'
     ],
     ajax: {
-        url: `${window.location.origin}/cliente`
+        url: '/cliente'
     },
     columns: [
         {data: 'id'},
@@ -55,7 +55,7 @@ let table = $('#clienteTable').DataTable({
 function excluir(id) {
     if (confirm("Deseja confirma ação ?")) {
         $.ajax({
-            url: `${window.location.origin}/cliente/${id}`,
+            url: `/cliente/${id}`,
             method: "DELETE",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -73,7 +73,7 @@ function excluir(id) {
 
 function editar(id) {
     $.ajax({
-        url: `${window.location.origin}/cliente/${id}`,
+        url: `/cliente/${id}`,
         method: "PUT",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -97,7 +97,7 @@ function editar(id) {
 function criar(element) {
     let paiElement = $(element).parent()
     $.ajax({
-        url: `${window.location.origin}/cliente`,
+        url: '/cliente',
         method: "POST",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
